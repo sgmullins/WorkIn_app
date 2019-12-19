@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Mount the / routes to the routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/workspots', workspotsRouter);
 app.use('/workspots/:id/reviews', reviewsRouter);
 
