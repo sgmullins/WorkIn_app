@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -5,7 +7,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const User = require('./models/user');
-const session = require('express-session')
+const session = require('express-session');
+const mongoose = require('mongoose');
 
 
 //Require Routes
@@ -13,7 +16,19 @@ const indexRouter = require('./routes/index.js');
 const usersRouter = require('./routes/users');
 const workspotsRouter = require('./routes/workspots.js');
 const reviewsRouter = require('./routes/reviews.js');
+
 const app = express();
+
+//connect to database
+mongoose.connect(process.env.DATABASEURL, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Connected to DB!');
+}).catch(err => {
+  console.log('ERROR:', err.message);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
