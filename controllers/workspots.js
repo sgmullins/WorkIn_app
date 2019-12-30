@@ -10,4 +10,10 @@ module.exports = {
 	newWorkspot(req, res, next) {
 		res.render('workspots/new');
 	},
+	//Create workspot
+	async createWorkspot(req, res, next) {
+		//use req.body to create a new workspot
+		let workspot = await Workspot.create(req.body);
+		res.redirect(`/workspots/${workspot.id}`);
+	},
 }

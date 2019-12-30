@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { errorHandler } = require('../middleware/user');
-const { getWorkspots, newWorkspot } = require('../controllers/workspots');
+const { getWorkspots, newWorkspot, createWorkspot } = require('../controllers/workspots');
 
 /* GET Workspots index page == /workspots */
 router.get('/', errorHandler(getWorkspots))
@@ -10,9 +10,7 @@ router.get('/', errorHandler(getWorkspots))
 router.get('/new', newWorkspot)
 
 /* POST Workspots create page == /workspots */
-router.post('/', (req, res, next) => {
-	res.send('CREATE /workspots/')
-});
+router.post('/', errorHandler(createWorkspot));
 
 /* GET Workspots show page == /workspots/:id */
 router.get('/:id', (req, res, next) => {
