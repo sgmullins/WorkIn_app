@@ -46,7 +46,9 @@ app.use(session({
   secret: 'keep workin man',
   resave: false,
   saveUninitialized: true
-}))
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(User.createStrategy());
 

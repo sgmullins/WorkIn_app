@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
+const passport = require('passport');
 const { postRegister } = require('../controllers/user');
+const { errorHandler } = require('../middleware/user');
 
 /* GET user /register. */
 router.get('/register', (req, res, next) => {
@@ -8,16 +10,23 @@ router.get('/register', (req, res, next) => {
 });
 
 /* POST user /register. */
-router.post('/register', postRegister);
+router.post('/register', errorHandler(postRegister));
 
 /* GET user /login. */
 router.get('/login', (req, res, next) => {
   res.send('GET Login page');
 });
 
-/* GET user /register. */
-router.post('/login', (req, res, next) => {
-  res.send('POST Login ');
+/* POST user /login. */
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
+
+/* GET /logout */
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
 });
 
 /////These will only be for each user //////
