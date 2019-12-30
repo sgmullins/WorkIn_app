@@ -16,4 +16,9 @@ module.exports = {
 		let workspot = await Workspot.create(req.body);
 		res.redirect(`/workspots/${workspot.id}`);
 	},
+	//Show workspot
+	async showWorkspot(req, res, next) {
+		let workspot = await Workspot.findById(req.params.id);
+		res.render('workspots/show', { workspot });
+	},
 }

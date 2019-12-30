@@ -1,1 +1,11 @@
-<h1>workspots index</h1>
+<h1>Workspots index</h1>
+
+<% workspots.forEach(function(workspot) { %>
+<div>
+	<h2><%= workspot.name %></h2>
+	<div><%= workspot.type %></div>
+	<div><%= workspot.description %></div>
+	<div>wifi: <%= workspot.wifi %></div>
+	<div><%= workspot.location %></div>
+</div>
+<% }); %>

@@ -5,8 +5,8 @@ const WorkspotSchema = new Schema({
 	name: String,
 	type: String,
 	description: String,
+	wifi: String,
 	features: [{
-		wifi: String,
 		outlet: String,
 		parking: String,
 		food: Boolean,
