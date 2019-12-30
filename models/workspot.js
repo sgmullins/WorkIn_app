@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 const WorkspotSchema = new Schema({
 	name: String,
+	type: String,
 	description: String,
 	features: [{
-		wifi: Boolean,
-		outlet: Boolean,
-		parking: Boolean,
+		wifi: String,
+		outlet: String,
+		parking: String,
 		food: Boolean,
 		alcohol: Boolean,
 		openLate: Boolean
