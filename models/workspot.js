@@ -6,13 +6,15 @@ const WorkspotSchema = new Schema({
 	type: String,
 	description: String,
 	wifi: String,
-	features: [{
-		outlet: String,
-		parking: String,
+	features: {
+		outlet: {
+			type: String
+		},
+		parking: { String },
 		food: Boolean,
 		alcohol: Boolean,
 		openLate: Boolean
-	}],
+	},
 	images: [String],
 	location: String,
 	lat: Number,
