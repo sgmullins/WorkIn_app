@@ -1,71 +1,97 @@
 <h1>Edit workspot</h1>
 
 <form action="/workspots/<%= workspot.id %>?_method=PUT" method="POST">
-	<input type="text" name="name" id="name" placeholder="Location name" value="<%= workspot.name %>">
+	<input type="text" name="workspot[name]" id="name" placeholder="Location name" value="<%= workspot.name %>">
 	<p>What type of Workspot is this?</p>
 	<div>
 		<label for="cafe">Cafe/Restaurant/Bar</label>
-		<input type="checkbox" name="type" id="cafe" value="Cafe/Restaurant/Bar"
+		<input type="checkbox" name="workspot[type]" id="cafe" value="Cafe/Restaurant/Bar"
 			<%= workspot.type.includes("Cafe/Restaurant/Bar") ? "checked" : "" %>>
 		<label for="cowork">CoWorking Space</label>
-		<input type="checkbox" name="type" id="cowork" value="CoWorking"
+		<input type="checkbox" name="workspot[type]" id="cowork" value="CoWorking"
 			<%= workspot.type.includes("CoWorking") ? "checked" : "" %>>
 		<label for="library">Library/Community Space</label>
-		<input type="checkbox" name="type" id="library" value="library"
+		<input type="checkbox" name="workspot[type]" id="library" value="library"
 			<%= workspot.type.includes("library") ? "checked" : "" %>>
 	</div>
-	<textarea name="description" id="" placeholder="Describe the Workspot"><%= workspot.description %></textarea>
+	<textarea name="workspot[description]" id=""
+		placeholder="Describe the Workspot"><%= workspot.description %></textarea>
 	<p>How
 		would you describe the Wifi speed?</p>
 	<div>
 		<label for="slow">Slow</label>
-		<input type="radio" name="wifi" id="slow" value="slow" <%= workspot.wifi.includes("slow") ? "checked" : "" %>>
+		<input type="radio" name="workspot[wifi]" id="slow" value="slow"
+			<%= workspot.wifi.includes("slow") ? "checked" : "" %>>
 		<label for="adequate">Adequate</label>
-		<input type="radio" name="wifi" id="adequate" value="adequate"
+		<input type="radio" name="workspot[wifi]" id="adequate" value="adequate"
 			<%= workspot.wifi.includes("adequate") ? "checked" : "" %>>
 		<label for="fast">Fast!!</label>
-		<input type="radio" name="wifi" id="fast" value="fast" <%= workspot.wifi.includes("fast") ? "checked" : "" %>>
+		<input type="radio" name="workspot[wifi]" id="fast" value="fast"
+			<%= workspot.wifi.includes("fast") ? "checked" : "" %>>
 	</div>
 	<p>How would you describe the access to Outlets?</p>
 	<div>
 		<label for="none">None</label>
-		<input type="radio" name="features[outlet]" id="none" value="none">
+		<input type="radio" name="workspot[outlet]" id="none" value="none"
+			<%= workspot.outlet.includes("none") ? "checked" : "" %>>
 		<label for="limited">Limited</label>
-		<input type="radio" name="features[outlet]" id="limited" value="limited">
+		<input type="radio" name="workspot[outlet]" id="limited" value="limited"
+			<%= workspot.outlet.includes("limited") ? "checked" : "" %>>
 		<label for="good">Good</label>
-		<input type="radio" name="features[outlet]" id="good" value="good">
+		<input type="radio" name="workspot[outlet]" id="good" value="good"
+			<%= workspot.outlet.includes("good") ? "checked" : "" %>>
 		<label for="alot">Alot!!</label>
-		<input type="radio" name="features[outlet]" id="alot" value="alot">
+		<input type="radio" name="workspot[outlet]" id="alot" value="alot"
+			<%= workspot.outlet.includes("alot") ? "checked" : "" %>>
 	</div>
 	<p>How is the parking?</p>
 	<div>
 		<label for="none">No Parking</label>
-		<input type="radio" name="features[parking]" id="none" value="none">
+		<input type="radio" name="workspot[parking]" id="none" value="none"
+			<%= workspot.parking.includes("none") ? "checked" : "" %>>
 		<label for="paid">Paid lot/Meters only</label>
-		<input type="radio" name="features[parking]" id="paid" value="paid">
+		<input type="radio" name="workspot[parking]" id="paid" value="paid"
+			<%= workspot.parking.includes("paid") ? "checked" : "" %>>
 		<label for="free">Free lot/Free Street parking</label>
-		<input type="radio" name="features[parking]" id="free" value="free">
+		<input type="radio" name="workspot[parking]" id="free" value="free"
+			<%= workspot.parking.includes("free") ? "checked" : "" %>>
 		<label for="mix">Both free and paid parking options</label>
-		<input type="radio" name="features[parking]" id="both" value="both">
+		<input type="radio" name="workspot[parking]" id="both" value="both"
+			<%= workspot.parking.includes("both") ? "checked" : "" %>>
+	</div>
+	<br>
+	<p>Is Food Served?</p>
+	<div>
+		<label for="yes">Yes</label>
+		<input type="radio" name="workspot[food]" id="yes" value="yes"
+			<%= workspot.food.includes("yes") ? "checked" : "" %>>
+		<label for="no">No</label>
+		<input type="radio" name="workspot[food]" id="no" value="no"
+			<%= workspot.food.includes("no") ? "checked" : "" %>>
+	</div>
+	<br>
+	<p>Is Alcohol Served?</p>
+	<div>
+		<label for="yes">Yes</label>
+		<input type="radio" name="workspot[alcohol]" id="yes" value="yes"
+			<%= workspot.alcohol.includes("yes") ? "checked" : "" %>>
+		<label for="no">No</label>
+		<input type="radio" name="workspot[alcohol]" id="no" value="no"
+			<%= workspot.alcohol.includes("no") ? "checked" : "" %>>
+	</div>
+	<br>
+	<p>Is the workspot open late (after 9:00pm)?</p>
+	<div>
+		<label for="yes">Yes</label>
+		<input type="radio" name="workspot[openLate]" id="yes" value="yes"
+			<%= workspot.openLate.includes("yes") ? "checked" : "" %>>
+		<label for="no">No</label>
+		<input type="radio" name="workspot[openLate]" id="no" value="no"
+			<%= workspot.openLate.includes("no") ? "checked" : "" %>>
 	</div>
 	<br>
 	<div>
-		<label for="food">Food?</label>
-		<input type="checkbox" name="features[food]" id="food" value="food">
-	</div>
-	<br>
-	<div>
-		<label for="alcohol">Alcohol?</label>
-		<input type="checkbox" name="features[alcohol]" id="alcohol" value="alcohol">
-	</div>
-	<br>
-	<div>
-		<label for="late">Open late(past 9:00pm)?</label>
-		<input type="checkbox" name="features[openLate]" id="late" value="openLate">
-	</div>
-	<br>
-	<div>
-		<input type="text" name="location" id="" placeholder="location" value="<%= workspot.location %>">
+		<input type="text" name="workspot[location]" id="" placeholder="location" value="<%= workspot.location %>">
 	</div>
 	<br>
 	<input type="submit">

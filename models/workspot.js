@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Schema.Types.Boolean.convertToFalse.add('off');
 const Schema = mongoose.Schema;
 
 const WorkspotSchema = new Schema({
@@ -6,15 +7,11 @@ const WorkspotSchema = new Schema({
 	type: String,
 	description: String,
 	wifi: String,
-	features: {
-		outlet: {
-			type: String
-		},
-		parking: { String },
-		food: Boolean,
-		alcohol: Boolean,
-		openLate: Boolean
-	},
+	outlet: String,
+	parking: String,
+	food: String,
+	alcohol: String,
+	openLate: String,
 	images: [String],
 	location: String,
 	lat: Number,

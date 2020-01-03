@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { asyncErrorHandler } = require('../middleware/user');
-const { workspotIndex, workspotNew, workspotCreate, workspotShow, workspotEdit } = require('../controllers/workspots');
+const { workspotIndex, workspotNew, workspotCreate, workspotShow, workspotEdit, workspotUpdate } = require('../controllers/workspots');
 
 /* GET Workspots index page == /workspots */
 router.get('/', asyncErrorHandler(workspotIndex))
@@ -19,9 +19,7 @@ router.get('/:id', asyncErrorHandler(workspotShow))
 router.get('/:id/edit', asyncErrorHandler(workspotEdit));
 
 /* PUT Workspots update page == /workspots/:id */
-router.put('/:id', (req, res, next) => {
-	res.send('UPDATE /workspots/:id')
-});
+router.put('/:id', asyncErrorHandler(workspotUpdate));
 
 /* DELETE Workspots destroy page == /workspots/:id */
 router.delete('/:id', (req, res, next) => {
