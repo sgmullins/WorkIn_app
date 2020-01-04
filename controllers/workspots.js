@@ -32,5 +32,9 @@ module.exports = {
 		let workspot = await Workspot.findByIdAndUpdate(req.params.id, req.body.workspot, { new: true });
 		res.redirect(`/workspots/${workspot.id}`);
 		console.log(req.body);
+	},
+	async workspotDestroy(req, res, next) {
+		await Workspot.findByIdAndRemove(req.params.id);
+		res.redirect("/workspots");
 	}
 }

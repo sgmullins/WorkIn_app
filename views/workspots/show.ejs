@@ -8,4 +8,13 @@
 <div>Serves Alcohol: <%= workspot.alcohol  %></div>
 <div>Stays open late: <%= workspot.openLate  %></div>
 <div><%= workspot.location %></div>
-<div><a href="/workspots/<%= workspot.id %>/edit">Edit Post</a></div>
+<div>
+	<a href="/workspots/<%= workspot.id %>/edit">
+		<button>Edit</button>
+	</a>
+</div>
+<div>
+	<form action="/workspots/<%= workspot.id %>?_method=DELETE" method="POST">
+		<input type="submit" value="Delete">
+	</form>
+</div>
