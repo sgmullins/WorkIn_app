@@ -14,7 +14,7 @@ module.exports = {
 	async workspotCreate(req, res, next) {
 		//use req.body to create a new workspot
 		console.log(req.body);
-		let workspot = await Workspot.create(req.body);
+		let workspot = await Workspot.create(req.body.workspot);
 		res.redirect(`/workspots/${workspot.id}`);
 	},
 	//Show workspot
@@ -29,7 +29,7 @@ module.exports = {
 	},
 	//Workspot Update
 	async workspotUpdate(req, res, next) {
-		let workspot = await Workspot.findByIdAndUpdate(req.params.id, req.body.workspot);
+		let workspot = await Workspot.findByIdAndUpdate(req.params.id, req.body.workspot, { new: true });
 		res.redirect(`/workspots/${workspot.id}`);
 		console.log(req.body);
 	}

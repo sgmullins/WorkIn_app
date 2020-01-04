@@ -1,77 +1,77 @@
 <h1>Add a new workspot</h1>
 
 <form action="/workspots" method="POST">
-	<input type="text" name="name" id="name" placeholder="Location name">
+	<input type="text" name="workspot[name]" id="name" placeholder="Location name">
 	<p>What type of Workspot is this?</p>
 	<div>
 		<label for="cafe">Cafe/Restaurant/Bar</label>
-		<input type="checkbox" name="type" id="cafe" value="Cafe/Restaurant/Bar">
+		<input type="checkbox" name="workspot[type]" id="cafe" value="Cafe/Restaurant/Bar">
 		<label for="cowork">CoWorking Space</label>
-		<input type="checkbox" name="type" id="cowork" value="CoWorking">
+		<input type="checkbox" name="workspot[type]" id="cowork" value="CoWorking">
 		<label for="library">Library/Community Space</label>
-		<input type="checkbox" name="type" id="library" value="library">
+		<input type="checkbox" name="workspot[type]" id="library" value="library">
 	</div>
-	<textarea name="description" id="" placeholder="Describe the Workspot"></textarea>
+	<textarea name="workspot[description]" id="" placeholder="Describe the Workspot"></textarea>
 	<p>How would you describe the Wifi speed?</p>
 	<div>
 		<label for="slow">Slow</label>
-		<input type="radio" name="wifi" id="slow" value="slow">
+		<input type="radio" name="workspot[wifi]" id="slow" value="slow">
 		<label for="adequate">Adequate</label>
-		<input type="radio" name="wifi" id="adequate" value="adequate">
+		<input type="radio" name="workspot[wifi]" id="adequate" value="adequate">
 		<label for="fast">Fast!!</label>
-		<input type="radio" name="wifi" id="fast" value="fast">
+		<input type="radio" name="workspot[wifi]" id="fast" value="fast">
 	</div>
 
 	<p>How would you describe the access to Outlets?</p>
 	<div>
 		<label for="none">None</label>
-		<input type="radio" name="outlet" id="none" value="none">
+		<input type="radio" name="workspot[outlet]" id="none" value="none">
 		<label for="limited">Limited</label>
-		<input type="radio" name="outlet" id="limited" value="limited">
+		<input type="radio" name="workspot[outlet]" id="limited" value="limited">
 		<label for="good">Good</label>
-		<input type="radio" name="outlet" id="good" value="good">
+		<input type="radio" name="workspot[outlet]" id="good" value="good">
 		<label for="alot">Alot!!</label>
-		<input type="radio" name="outlet" id="alot" value="alot">
+		<input type="radio" name="workspot[outlet]" id="alot" value="alot">
 	</div>
 
 	<p>How is the parking?</p>
 	<div>
 		<label for="none">No Parking</label>
-		<input type="radio" name="parking" id="none" value="none">
+		<input type="radio" name="workspot[parking]" id="none" value="none">
 		<label for="paid">Paid lot/Meters only</label>
-		<input type="radio" name="parking" id="paid" value="paid">
+		<input type="radio" name="workspot[parking]" id="paid" value="paid">
 		<label for="free">Free lot/Free Street parking</label>
-		<input type="radio" name="parking" id="free" value="free">
+		<input type="radio" name="workspot[parking]" id="free" value="free">
 		<label for="mix">Both free and paid parking options</label>
-		<input type="radio" name="parking" id="both" value="both">
+		<input type="radio" name="workspot[parking]" id="both" value="both">
 	</div>
 	<br>
 	<p>Is Food Served?</p>
 	<div>
 		<label for="yes">Yes</label>
-		<input type="radio" name="food" id="yes" value="yes">
+		<input type="radio" name="workspot[food]" id="yes" value="yes">
 		<label for="no">No</label>
-		<input type="radio" name="food" id="no" value="no">
+		<input type="radio" name="workspot[food]" id="no" value="no">
 	</div>
 	<br>
 	<p>Is Alcohol Served?</p>
 	<div>
 		<label for="yes">Yes</label>
-		<input type="radio" name="alcohol" id="yes" value="yes">
+		<input type="radio" name="workspot[alcohol]" id="yes" value="yes">
 		<label for="no">No</label>
-		<input type="radio" name="alcohol" id="no" value="no">
+		<input type="radio" name="workspot[alcohol]" id="no" value="no">
 	</div>
 	<br>
 	<p>Is the workspot open late (after 9:00pm)?</p>
 	<div>
 		<label for="yes">Yes</label>
-		<input type="radio" name="openLate" id="yes" value="yes">
+		<input type="radio" name="workspot[openLate]" id="yes" value="yes">
 		<label for="no">No</label>
-		<input type="radio" name="openLate" id="no" value="no">
+		<input type="radio" name="workspot[openLate]" id="no" value="no">
 	</div>
 	<br>
 	<div>
-		<input type="text" name="location" id="" placeholder="location">
+		<input type="text" name="workspot[location]" id="" placeholder="location">
 	</div>
 	<br>
 	<input type="submit">
