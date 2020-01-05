@@ -12,7 +12,7 @@ const WorkspotSchema = new Schema({
 	food: String,
 	alcohol: String,
 	openLate: String,
-	images: [String],
+	images: [{ url: String, public_id: String }],
 	location: String,
 	lat: Number,
 	lng: Number,

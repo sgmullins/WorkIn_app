@@ -9,6 +9,11 @@
 <div>Stays open late: <%= workspot.openLate  %></div>
 <div><%= workspot.location %></div>
 <div>
+	<% workspot.images.forEach(function(image) { %>
+	<img src="<%= image.url %>" alt="Workspot Image" width="200px">
+	<% });  %>
+</div>
+<div>
 	<a href="/workspots/<%= workspot.id %>/edit">
 		<button>Edit</button>
 	</a>

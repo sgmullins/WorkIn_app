@@ -1,7 +1,9 @@
 <h1>Add a new workspot</h1>
 
-<form action="/workspots" method="POST">
+<form action="/workspots" method="POST" enctype="multipart/form-data">
+
 	<input type="text" name="workspot[name]" id="name" placeholder="Location name">
+
 	<p>What type of Workspot is this?</p>
 	<div>
 		<label for="cafe">Cafe/Restaurant/Bar</label>
@@ -11,7 +13,9 @@
 		<label for="library">Library/Community Space</label>
 		<input type="checkbox" name="workspot[type]" id="library" value="library">
 	</div>
+
 	<textarea name="workspot[description]" id="" placeholder="Describe the Workspot"></textarea>
+
 	<p>How would you describe the Wifi speed?</p>
 	<div>
 		<label for="slow">Slow</label>
@@ -46,6 +50,7 @@
 		<input type="radio" name="workspot[parking]" id="both" value="both">
 	</div>
 	<br>
+
 	<p>Is Food Served?</p>
 	<div>
 		<label for="yes">Yes</label>
@@ -54,6 +59,7 @@
 		<input type="radio" name="workspot[food]" id="no" value="no">
 	</div>
 	<br>
+
 	<p>Is Alcohol Served?</p>
 	<div>
 		<label for="yes">Yes</label>
@@ -62,6 +68,7 @@
 		<input type="radio" name="workspot[alcohol]" id="no" value="no">
 	</div>
 	<br>
+
 	<p>Is the workspot open late (after 9:00pm)?</p>
 	<div>
 		<label for="yes">Yes</label>
@@ -70,6 +77,7 @@
 		<input type="radio" name="workspot[openLate]" id="no" value="no">
 	</div>
 	<br>
+	<div><input type="file" accept="images/*" name="images" multiple /></div>
 	<div>
 		<input type="text" name="workspot[location]" id="" placeholder="location">
 	</div>
