@@ -1,6 +1,7 @@
 <h1>Edit workspot</h1>
 
-<form action="/workspots/<%= workspot.id %>?_method=PUT" method="POST">
+<form action="/workspots/<%= workspot.id %>?_method=PUT" method="POST" id="workspotEditForm"
+	enctype="multipart/form-data">
 	<input type="text" name="workspot[name]" id="name" placeholder="Location name" value="<%= workspot.name %>">
 	<p>What type of Workspot is this?</p>
 	<div>
@@ -90,9 +91,31 @@
 			<%= workspot.openLate.includes("no") ? "checked" : "" %>>
 	</div>
 	<br>
+
+	<div>
+		<input type="file" id="imageUpload" accept="images/*" name="images" multiple />
+		<div>
+			<% workspot.images.forEach(function(image, index) { %>
+			<img src="<%= image.url %>" alt="" width="100px">
+			<label for="image<%= index %>">Delete?</label>
+			<input type="checkbox" class="imageDeleteCheckbox" name="deleteImages[]" id="image<%= index %>"
+				value="<%= image.public_id %>">
+			<% }); %>
+		</div>
+	</div>
+
 	<div>
 		<input type="text" name="workspot[location]" id="" placeholder="location" value="<%= workspot.location %>">
 	</div>
 	<br>
 	<input type="submit">
 </form>
+
+<script>
+	// find edit form
+	let workspotEditForm = document.getElementById('workspotEditForm');
+	//add submit listener to edit form
+	workspotEditForm.addEventListener('submit', function (event) {
+
+	})
+</script>

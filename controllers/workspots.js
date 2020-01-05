@@ -22,7 +22,7 @@ module.exports = {
 	//Create workspot
 	async workspotCreate(req, res, next) {
 		//use req.body to create a new workspot
-		console.log(req.body);
+
 		req.body.workspot.images = [];
 		for (const file of req.files) {
 			let image = await cloudinary.v2.uploader.upload(file.path); //file.path is a multer method
@@ -32,6 +32,7 @@ module.exports = {
 			});
 		}
 		let workspot = await Workspot.create(req.body.workspot);
+		console.log(req.body);
 		res.redirect(`/workspots/${workspot.id}`);
 	},
 
@@ -49,7 +50,42 @@ module.exports = {
 
 	//Workspot Update
 	async workspotUpdate(req, res, next) {
-		let workspot = await Workspot.findByIdAndUpdate(req.params.id, req.body.workspot, { new: true });
+		let workspot = await Workspot.findById(req.params.id);//find workspot by id
+		if (req.body.deleteImages && req.body.deleteImages.length) {//check if images from deletion from edit form
+			let deleteImages = req.body.deleteImages;//assign deleteImages from req.body to own var
+			for (const public_id of deleteImages) {//loop over deleteimages
+				await cloudinary.v2.uploader.destroy(public_id);//delete method from cloudinary
+				for (const image of workspot.images) {//loop and delete from images array workspot.images
+					if (image.public_id === public_id) {
+						let index = workspot.images.indexOf(image);
+						workspot.images.splice(index, 1);
+					}
+				}
+			}
+		}
+		if (req.files) {
+			for (const file of req.files) {
+				let image = await cloudinary.v2.uploader.upload(file.path); //file.path is a multer method
+				workspot.images.push({
+					url: image.secure_url,
+					public_id: image.public_id
+				});
+			}
+		}
+		workspot.name = req.body.workspot.name;
+		workspot.type = req.body.workspot.type;
+		workspot.description = req.body.workspot.description;
+		workspot.wifi = req.body.workspot.wifi;
+		workspot.outlet = req.body.workspot.outlet;
+		workspot.parking = req.body.workspot.parking;
+		workspot.food = req.body.workspot.food;
+		workspot.alcohol = req.body.workspot.alcohol;
+		workspot.openLate = req.body.workspot.openLate;
+		workspot.location = req.body.workspot.location;
+
+		workspot.save();
+
+
 		res.redirect(`/workspots/${workspot.id}`);
 		console.log(req.body);
 	},

@@ -21,7 +21,7 @@ router.get('/:id', asyncErrorHandler(workspotShow))
 router.get('/:id/edit', asyncErrorHandler(workspotEdit));
 
 /* PUT Workspots update page == /workspots/:id */
-router.put('/:id', asyncErrorHandler(workspotUpdate));
+router.put('/:id', upload.array('images'), asyncErrorHandler(workspotUpdate));
 
 /* DELETE Workspots destroy page == /workspots/:id */
 router.delete('/:id', asyncErrorHandler(workspotDestroy));
