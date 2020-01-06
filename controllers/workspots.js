@@ -1,4 +1,5 @@
 const Workspot = require('../models/workspot');
+const { checkReqBody } = require('../middleware/workspot');
 
 const cloudinary = require('cloudinary');
 cloudinary.config({
@@ -31,6 +32,9 @@ module.exports = {
 				public_id: image.public_id
 			});
 		}
+		//check req body for checkbox/radio button attributes
+		await checkReqBody(req);
+
 		let workspot = await Workspot.create(req.body.workspot);
 		console.log(req.body);
 		res.redirect(`/workspots/${workspot.id}`);
@@ -72,6 +76,9 @@ module.exports = {
 				});
 			}
 		}
+		//check req body for checkbox/radio button attributes
+		await checkReqBody(req);
+
 		workspot.name = req.body.workspot.name;
 		workspot.type = req.body.workspot.type;
 		workspot.description = req.body.workspot.description;
