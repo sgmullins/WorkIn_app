@@ -53,7 +53,7 @@ module.exports = {
 		let workspot = await Workspot.findById(req.params.id);//find workspot by id
 		if (req.body.deleteImages && req.body.deleteImages.length) {//check if images from deletion from edit form
 			let deleteImages = req.body.deleteImages;//assign deleteImages from req.body to own var
-			for (const public_id of deleteImages) {//loop over deleteimages
+			for (const public_id of deleteImages) {//loop over deleteImages
 				await cloudinary.v2.uploader.destroy(public_id);//delete method from cloudinary
 				for (const image of workspot.images) {//loop and delete from images array workspot.images
 					if (image.public_id === public_id) {
@@ -85,13 +85,16 @@ module.exports = {
 
 		workspot.save();
 
-
 		res.redirect(`/workspots/${workspot.id}`);
 		console.log(req.body);
 	},
 	//Workspot Destroy
 	async workspotDestroy(req, res, next) {
-		await Workspot.findByIdAndRemove(req.params.id);
+		let workspot = await Workspot.findById(req.params.id);
+		for (const image of workspot.images) {
+			await cloudinary.v2.uploader.destroy(image.public_id)
+		}
+		await workspot.remove();
 		res.redirect("/workspots");
 	}
 }
