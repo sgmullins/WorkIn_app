@@ -1,35 +1,4 @@
-<script>
-	let workspot = <%- JSON.stringify(workspot) %>
-
-		let map;
-
-	function initMap() {
-		let myLatLng = {
-			lat: workspot.lat,
-			lng: workspot.lng
-		};
-
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: myLatLng,
-			zoom: 9
-		});
-
-		let marker = new google.maps.Marker({
-			position: myLatLng,
-			map: map,
-			title: workspot.name
-		});
-	}
-</script>
-
-<style>
-	/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-	#map {
-		height: 300px;
-		width: 400px;
-	}
-</style>
+<% layout('layouts/workspot-show-layout') -%>
 
 <h1><%= workspot.name %></h1>
 <div><%= workspot.type %></div>
@@ -59,5 +28,3 @@
 </div>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWHV7pIC6NWtXUgs77UdCs-BIpMVIju1g
-&callback=initMap" async defer></script>
