@@ -10,6 +10,8 @@ module.exports = {
 		if (!req.body.workspot.food) { req.body.workspot.food = "" }
 		if (!req.body.workspot.alcohol) { req.body.workspot.alcohol = "" }
 		if (!req.body.workspot.openLate) { req.body.workspot.openLate = "" }
+		if (!req.body.workspot.lat) { req.body.workspot.lat = "" }
+		if (!req.body.workspot.lng) { req.body.workspot.lng = "" }
 	}
 
 }

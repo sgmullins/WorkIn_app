@@ -1,6 +1,10 @@
+require('dotenv').config();
 const Workspot = require('../models/workspot');
 const { checkReqBody } = require('../middleware/workspot');
-
+const googleMapsClient = require('@google/maps').createClient({
+	key: process.env.GOOGLEMAPS_API_KEY,
+	Promise: Promise
+});
 const cloudinary = require('cloudinary');
 cloudinary.config({
 	cloud_name: 'gearswap',
@@ -32,11 +36,20 @@ module.exports = {
 				public_id: image.public_id
 			});
 		}
+		//google map coding
+		let response = await googleMapsClient
+			.geocode({
+				address: req.body.workspot.location
+			})
+			.asPromise();
+		req.body.workspot.lat = response.json.results[0].geometry.location.lat;
+		req.body.workspot.lng = response.json.results[0].geometry.location.lng;
+
 		//check req body for checkbox/radio button attributes
 		await checkReqBody(req);
 
 		let workspot = await Workspot.create(req.body.workspot);
-		console.log(req.body);
+		console.log(workspot);
 		res.redirect(`/workspots/${workspot.id}`);
 	},
 
@@ -76,9 +89,23 @@ module.exports = {
 				});
 			}
 		}
+		//Check if location was updated
+		if(req.body.workspot.location !== workspot.location){
+			//google map coding
+			let response = await googleMapsClient
+			.geocode({
+				address: req.body.workspot.location
+			})
+			.asPromise();
+			workspot.lat = response.json.results[0].geometry.location.lat;
+			workspot.lng = response.json.results[0].geometry.location.lng;
+			workspot.location = req.body.workspot.location;
+		}
+		
 		//check req body for checkbox/radio button attributes
 		await checkReqBody(req);
 
+		//Reassign workspot values
 		workspot.name = req.body.workspot.name;
 		workspot.type = req.body.workspot.type;
 		workspot.description = req.body.workspot.description;
@@ -88,13 +115,13 @@ module.exports = {
 		workspot.food = req.body.workspot.food;
 		workspot.alcohol = req.body.workspot.alcohol;
 		workspot.openLate = req.body.workspot.openLate;
-		workspot.location = req.body.workspot.location;
 
 		workspot.save();
 
 		res.redirect(`/workspots/${workspot.id}`);
 		console.log(req.body);
 	},
+	
 	//Workspot Destroy
 	async workspotDestroy(req, res, next) {
 		let workspot = await Workspot.findById(req.params.id);
