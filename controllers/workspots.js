@@ -2,7 +2,7 @@ require('dotenv').config();
 const Workspot = require('../models/workspot');
 const { checkReqBody } = require('../middleware/workspot');
 const googleMapsClient = require('@google/maps').createClient({
-	key: process.env.GOOGLEMAPS_API_KEY,
+	key: process.env.GEOCODER_API_KEY,
 	Promise: Promise
 });
 const cloudinary = require('cloudinary');
@@ -16,7 +16,7 @@ module.exports = {
 	//Workspot index
 	async workspotIndex(req, res, next) {
 		let workspots = await Workspot.find({});
-		res.render('workspots/index', { workspots })
+		res.render('workspots/index', { workspots, title: 'Workspots Index' })
 	},
 
 	//New workspot

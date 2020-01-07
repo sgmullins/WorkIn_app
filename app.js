@@ -53,6 +53,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//title middleware
+app.use(function(req, res, next){
+  res.locals.title = "WorkIn";
+  next();
+});
+
 //Mount the / routes to the routes
 app.use('/', indexRouter);
 app.use('/', usersRouter);
@@ -74,5 +80,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
