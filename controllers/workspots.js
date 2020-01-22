@@ -58,7 +58,10 @@ module.exports = {
 
 	//Show workspot
 	async workspotShow(req, res, next) {
-		let workspot = await Workspot.findById(req.params.id);
+		let workspot = await Workspot.findById(req.params.id).populate({
+			path: 'reviews',
+			options: {sort: {'_id': -1}}
+		});
 		res.render('workspots/show', { workspot });
 	},
 

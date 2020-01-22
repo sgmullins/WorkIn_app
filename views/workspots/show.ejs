@@ -7,24 +7,43 @@
 <div>outlets: <%= workspot.outlet %></div>
 <div>Parking: <%= workspot.parking %></div>
 <div>Serves Food: <%= workspot.food %></div>
-<div>Serves Alcohol: <%= workspot.alcohol  %></div>
-<div>Stays open late: <%= workspot.openLate  %></div>
+<div>Serves Alcohol: <%= workspot.alcohol %></div>
+<div>Stays open late: <%= workspot.openLate %></div>
 <div><%= workspot.location %></div>
 <div>
-	<% workspot.images.forEach(function(image) { %>
-	<img src="<%= image.url %>" alt="Workspot Image" width="200px">
-	<% });  %>
+  <% workspot.images.forEach(function(image) { %>
+  <img src="<%= image.url %>" alt="Workspot Image" width="200px" />
+  <% }); %>
 </div>
 <div id="map"></div>
 <div>
-	<a href="/workspots/<%= workspot.id %>/edit">
-		<button>Edit</button>
-	</a>
+  <a href="/workspots/<%= workspot.id %>/edit">
+    <button>Edit</button>
+  </a>
 </div>
 <div>
-	<form action="/workspots/<%= workspot.id %>?_method=DELETE" method="POST">
-		<input type="submit" value="Delete">
-	</form>
+  <form action="/workspots/<%= workspot.id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete" />
+  </form>
 </div>
 
+<h2>Create a review</h2>
+<form action="/workspots/<%= workspot.id %>/reviews" method="POST">
+  <textarea name="review[body]" required></textarea>
+  <input
+    type="number"
+    name="review[rating]"
+    min="1"
+    max="5"
+    step="1"
+    required
+  />
+  <input type="submit" />
+</form>
 
+<h3>Reviews</h3>
+<% workspot.reviews.forEach(function(review) { %>
+<div>
+  <%= review.body %> Rating: <%= review.rating %>
+</div>
+<% }) %>
