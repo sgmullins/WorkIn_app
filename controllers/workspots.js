@@ -16,6 +16,8 @@ module.exports = {
 	//Workspot index
 	async workspotIndex(req, res, next) {
 		let workspots = await Workspot.find({});
+		// console.log(workspots[0].name)
+		// res.send(workspots);
 		res.render('workspots/index', { workspots, title: 'Workspots Index' })
 	},
 
@@ -49,7 +51,8 @@ module.exports = {
 		await checkReqBody(req);
 
 		let workspot = await Workspot.create(req.body.workspot);
-		console.log(workspot);
+		// console.log(workspot);
+		req.session.success = "Workspot Created Successfully!"
 		res.redirect(`/workspots/${workspot.id}`);
 	},
 
@@ -90,18 +93,18 @@ module.exports = {
 			}
 		}
 		//Check if location was updated
-		if(req.body.workspot.location !== workspot.location){
+		if (req.body.workspot.location !== workspot.location) {
 			//google map coding
 			let response = await googleMapsClient
-			.geocode({
-				address: req.body.workspot.location
-			})
-			.asPromise();
+				.geocode({
+					address: req.body.workspot.location
+				})
+				.asPromise();
 			workspot.lat = response.json.results[0].geometry.location.lat;
 			workspot.lng = response.json.results[0].geometry.location.lng;
 			workspot.location = req.body.workspot.location;
 		}
-		
+
 		//check req body for checkbox/radio button attributes
 		await checkReqBody(req);
 
@@ -121,7 +124,7 @@ module.exports = {
 		res.redirect(`/workspots/${workspot.id}`);
 		console.log(req.body);
 	},
-	
+
 	//Workspot Destroy
 	async workspotDestroy(req, res, next) {
 		let workspot = await Workspot.findById(req.params.id);
