@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true }); //allows us to pull id from app.js(parent router) app.use with the id from req.params
-const { asyncErrorHandler } = require("../middleware/user");
+const { asyncErrorHandler, isReviewAuthor } = require("../middleware/user");
 const {
   reviewCreate,
   reviewDestroy,
@@ -11,11 +11,9 @@ const {
 router.post("/", asyncErrorHandler(reviewCreate));
 
 /* PUT reviews update page ==  /workspots/:id/reviews/:review_id */
-router.put("/:review_id", asyncErrorHandler(reviewUpdate));
+router.put("/:review_id", isReviewAuthor, asyncErrorHandler(reviewUpdate));
 
 /* DELETE reviews destroy page ==  /workspots/:id/reviews/:review_id */
-router.delete("/:review_id", (req, res, next) => {
-  res.send("DELETE  /workspots/:id/reviews/:review_id");
-});
+router.delete("/:review_id", isReviewAuthor, asyncErrorHandler(reviewDestroy));
 
 module.exports = router;
