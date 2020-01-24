@@ -59,6 +59,11 @@ passport.deserializeUser(User.deserializeUser());
 
 //set local variables middleware (pre-route)
 app.use(function(req, res, next) {
+  req.user = {
+    _id: "5e2b2cd1c1f50ca804a7151b",
+    username: "steve"
+  };
+  res.locals.currentUser = req.user;
   //set default page title
   res.locals.title = "WorkIn";
   //set success flash message
